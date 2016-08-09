@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Listagem de Pizzas {% endblock %}
+
+{% block content %}
+
+    <h1>Listagem de Pizzas</h1>
+
+    <table class="table table-bordered table-condensed table-striped table-he">
+        <tr>
+            <th>Sabor</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th colspan="2"></th>
+        </tr>
+        {% for pizza in pizzas %}
+            <tr>
+                <td>{{ pizza.sabor }}</td>
+                <td>{{ pizza.descricao }}</td>
+                <td>{{ pizza.valor }}</td>
+                <td><a href="{% url 'edita-pizza' pizza.id %}">Editar</a></td>
+                <td><a href="{% url 'exclui-pizza' pizza.id %}">Excluir</a></td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Ingredientes:
+                    {% for ingrediente in pizza.ingredientes.all %}
+                        {{ ingrediente.nome }};
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}
