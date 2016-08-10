@@ -21,10 +21,10 @@ def lista_ingredientes(request):
 
 class PizzaCreate(CreateView):
     model = Pizza
-    fields = ['sabor', 'descricao', 'valor', 'ingredientes']
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
+        self.object.save()
         for ingrediente in form.cleaned_data['ingredientes']:
             ingredientes_pizza = IngredientesPizza()
             ingredientes_pizza.pizza = self.object
@@ -34,10 +34,12 @@ class PizzaCreate(CreateView):
 
 class PizzaUpdate(UpdateView):
     model = Pizza
-    fields = ['sabor', 'descricao', 'valor', 'ingredientes']
+    template_name_suffix = '_update_form'
+    form_class = CadastroPizzaForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
+        self.object.save()
         for ingrediente in form.cleaned_data['ingredientes']:
             ingredientes_pizza = IngredientesPizza()
             ingredientes_pizza.pizza = self.object
