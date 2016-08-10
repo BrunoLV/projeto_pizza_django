@@ -18,8 +18,8 @@
                 <td>{{ pizza.sabor }}</td>
                 <td>{{ pizza.descricao }}</td>
                 <td>{{ pizza.valor }}</td>
-                <td><a href="{% url 'edita-pizza' pizza.id %}">Editar</a></td>
-                <td><a href="{% url 'exclui-pizza' pizza.id %}">Excluir</a></td>
+                <td><a href="{% url 'edita-pizza' pizza.id %}" class="btn btn-primary">Editar</a></td>
+                <td><a href="{% url 'exclui-pizza' pizza.id %}" class="btn btn-danger">Excluir</a></td>
             </tr>
             <tr>
                 <td colspan="5">

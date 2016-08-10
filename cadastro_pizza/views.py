@@ -21,6 +21,7 @@ def lista_ingredientes(request):
 
 class PizzaCreate(CreateView):
     model = Pizza
+    form_class = CadastroPizzaForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
