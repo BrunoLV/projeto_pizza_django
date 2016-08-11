@@ -14,14 +14,7 @@ class Pizza(models.Model):
     sabor = models.CharField(max_length=100, null=False, blank=False, unique=True)
     descricao = models.CharField(max_length=255, null=False, blank=False)
     valor = models.DecimalField(null=False, max_digits=5, decimal_places=2)
-    ingredientes = models.ManyToManyField(
-        Ingrediente,
-        through='IngredientesPizza',
-    )
+    ingredientes = models.ManyToManyField(Ingrediente,blank=True)
 
     def get_absolute_url(self):
         return reverse('lista-pizzas')
-
-class IngredientesPizza(models.Model):
-    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
-    ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE)

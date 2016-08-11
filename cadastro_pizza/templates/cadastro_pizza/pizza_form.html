@@ -6,11 +6,10 @@
 
     <h1>Cadastro de Pizzas</h1>
 
-        <form method="post" class="form-inline">
+        <form method="post" class="fform-horizontal">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Cadastrar" class="btn btn-primary">
          </form>
-    </div>
 
 {% endblock %}

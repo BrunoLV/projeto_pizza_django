@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import View, CreateView, UpdateView, DeleteView, ModelFormMixin
 from django.core.urlresolvers import reverse_lazy
 
-from .models import Pizza, Ingrediente, IngredientesPizza
+from .models import Pizza, Ingrediente
 from .forms import CadastroPizzaForm
 
 # Create your views here.
@@ -23,30 +23,10 @@ class PizzaCreate(CreateView):
     model = Pizza
     form_class = CadastroPizzaForm
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        for ingrediente in form.cleaned_data['ingredientes']:
-            ingredientes_pizza = IngredientesPizza()
-            ingredientes_pizza.pizza = self.object
-            ingredientes_pizza.ingrediente = ingrediente
-            ingredientes_pizza.save()
-        return super(ModelFormMixin, self).form_valid(form)
-
 class PizzaUpdate(UpdateView):
     model = Pizza
     template_name_suffix = '_update_form'
     form_class = CadastroPizzaForm
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        for ingrediente in form.cleaned_data['ingredientes']:
-            ingredientes_pizza = IngredientesPizza()
-            ingredientes_pizza.pizza = self.object
-            ingredientes_pizza.ingrediente = ingrediente
-            ingredientes_pizza.save()
-        return super(ModelFormMixin, self).form_valid(form)
 
 class PizzaDelete(DeleteView):
     model = Pizza

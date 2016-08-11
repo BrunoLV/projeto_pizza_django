@@ -6,7 +6,7 @@
 
     <h1>Listagem de Pizzas</h1>
 
-    <table class="table table-bordered table-condensed table-striped table-he">
+    <table class="table table-condensed table-striped table-hover">
         <tr>
             <th>Sabor</th>
             <th>Descrição</th>
@@ -15,15 +15,15 @@
         </tr>
         {% for pizza in pizzas %}
             <tr>
-                <td>{{ pizza.sabor }}</td>
-                <td>{{ pizza.descricao }}</td>
-                <td>{{ pizza.valor }}</td>
-                <td><a href="{% url 'edita-pizza' pizza.id %}" class="btn btn-primary">Editar</a></td>
-                <td><a href="{% url 'exclui-pizza' pizza.id %}" class="btn btn-danger">Excluir</a></td>
+                <td style="vertical-align: middle">{{ pizza.sabor }}</td>
+                <td style="vertical-align: middle">{{ pizza.descricao }}</td>
+                <td style="vertical-align: middle">{{ pizza.valor }}</td>
+                <td style="text-align: center"><a href="{% url 'edita-pizza' pizza.id %}" class="btn btn-primary">Editar</a></td>
+                <td style="text-align: center"><a href="{% url 'exclui-pizza' pizza.id %}" class="btn btn-danger">Excluir</a></td>
             </tr>
             <tr>
-                <td colspan="5">
-                    Ingredientes:
+                <td style="vertical-align: middle" colspan="5">
+                    <b>Ingredientes:</b>
                     {% for ingrediente in pizza.ingredientes.all %}
                         {{ ingrediente.nome }};
                     {% endfor %}
