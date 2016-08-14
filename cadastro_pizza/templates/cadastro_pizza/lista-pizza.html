@@ -6,6 +6,8 @@
 
     <h1>Listagem de Pizzas</h1>
 
+    <a href="{% url 'cadastra-pizza' %}" class="btn btn-primary">Novo</a>
+    <br/><br/>
     <table class="table table-condensed table-striped table-hover">
         <tr>
             <th>Sabor</th>
@@ -30,7 +32,6 @@
                 </td>
             </tr>
         {% endfor %}
-
     </table>
 
 {% endblock %}
