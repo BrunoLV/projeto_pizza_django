@@ -6,7 +6,10 @@
 
     <h1>Listagem de Pizzas</h1>
 
-    <a href="{% url 'pizzas:nova-pizza' %}" class="btn btn-primary">Novo</a>
+    <a href="{% url 'pizzas:nova-pizza' %}">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Novo
+    </a>
     <br/><br/>
     <table class="table table-condensed table-striped table-hover">
         <tr>
@@ -18,8 +21,18 @@
             <tr>
                 <td style="vertical-align: middle">{{ pizza.sabor }}</td>
                 <td style="vertical-align: middle">{{ pizza.descricao }}</td>
-                <td style="text-align: center"><a href="{% url 'pizzas:edita-pizza' pizza.id %}" class="btn btn-primary">Editar</a></td>
-                <td style="text-align: center"><a href="{% url 'pizzas:exclui-pizza' pizza.id %}" class="btn btn-danger">Excluir</a></td>
+                <td style="text-align: center">
+                    <a href="{% url 'pizzas:edita-pizza' pizza.id %}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        Editar
+                    </a>
+                </td>
+                <td style="text-align: center">
+                    <a href="{% url 'pizzas:exclui-pizza' pizza.id %}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        Excluir
+                    </a>
+                </td>
             </tr>
             <tr>
                 <td style="vertical-align: middle" colspan="5">

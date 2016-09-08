@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from django.views.generic.edit import View, CreateView, UpdateView, DeleteView, ModelFormMixin
+from django.views.generic.edit import DeleteView, ModelFormMixin
 from django.core.urlresolvers import reverse_lazy
 
 from .models import Pizza, Ingrediente
@@ -21,16 +21,27 @@ def lista_ingredientes(request):
 
 def nova_pizza(request):
     template_name = 'cadastro_pizza/cadastro-pizza.html'
-    context = {
-        'form':CadastroPizzaForm
-    }
+    context = {}
     if request.method == 'GET':
+        context['form'] = CadastroPizzaForm
         return render(request, template_name, context)
     if request.method == 'POST':
         form = CadastroPizzaForm(request.POST)
         if form.is_valid:
             form.save()
             return redirect('pizzas:lista-pizzas')
+
+def edita_pizza(request,pk):
+    template_name = 'cadastro_pizza/cadastro-pizza.html'
+    context = {}
+    if request.method == 'GET':
+        context['form'] = CadastroPizzaForm(instance=Pizza.objects.get(pk=pk))
+        return render(request, template_name, context)
+    if request.method == 'POST':
+        form = CadastroPizzaForm(request.POST, instance=Pizza.objects.get(pk=pk))
+        if form.is_valid:
+            form.save()
+            return redirect('pizzas:lista-pizzas')    
     
 def novo_ingrediente(request):
     template_name = 'cadastro_pizza/cadastro-ingrediente.html'
@@ -45,22 +56,6 @@ def novo_ingrediente(request):
             form.save()
             return redirect('pizzas:lista-pizzas')
 
-class PizzaCreate(CreateView):
-    model = Pizza
-    form_class = CadastroPizzaForm
-
-class PizzaUpdate(UpdateView):
-    model = Pizza
-    template_name_suffix = '_update_form'
-    form_class = CadastroPizzaForm
-
 class PizzaDelete(DeleteView):
     model = Pizza
-    success_url = reverse_lazy('lista-pizzas')
-
-class CadastroIngredienteView(View):
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('Testando get')
-
-    def post(self, *args, **kwargs):
-        return HttpResponse('Testando post')
+    success_url = reverse_lazy('pizzas:lista-pizzas')

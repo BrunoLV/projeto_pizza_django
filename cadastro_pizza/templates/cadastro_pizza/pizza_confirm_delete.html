@@ -8,7 +8,10 @@
         {% csrf_token %}
         Você tem certeza que deseja excluir a pizza {{ object.sabor }}?
         <br/>
-        <input type="submit" value="Confirmar" />
+        <button type="submit" value="Confirmar" class="btn btn-danger">
+        	<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        	Sim
+        </button>
     </form>
 
 {% endblock %}
