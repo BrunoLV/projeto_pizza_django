@@ -6,22 +6,20 @@
 
     <h1>Listagem de Pizzas</h1>
 
-    <a href="{% url 'cadastra-pizza' %}" class="btn btn-primary">Novo</a>
+    <a href="{% url 'pizzas:nova-pizza' %}" class="btn btn-primary">Novo</a>
     <br/><br/>
     <table class="table table-condensed table-striped table-hover">
         <tr>
             <th>Sabor</th>
             <th>Descrição</th>
-            <th>Valor</th>
             <th colspan="2"></th>
         </tr>
         {% for pizza in pizzas %}
             <tr>
                 <td style="vertical-align: middle">{{ pizza.sabor }}</td>
                 <td style="vertical-align: middle">{{ pizza.descricao }}</td>
-                <td style="vertical-align: middle">{{ pizza.valor }}</td>
-                <td style="text-align: center"><a href="{% url 'edita-pizza' pizza.id %}" class="btn btn-primary">Editar</a></td>
-                <td style="text-align: center"><a href="{% url 'exclui-pizza' pizza.id %}" class="btn btn-danger">Excluir</a></td>
+                <td style="text-align: center"><a href="{% url 'pizzas:edita-pizza' pizza.id %}" class="btn btn-primary">Editar</a></td>
+                <td style="text-align: center"><a href="{% url 'pizzas:exclui-pizza' pizza.id %}" class="btn btn-danger">Excluir</a></td>
             </tr>
             <tr>
                 <td style="vertical-align: middle" colspan="5">
