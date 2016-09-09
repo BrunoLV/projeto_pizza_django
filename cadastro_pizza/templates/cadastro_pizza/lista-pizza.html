@@ -4,45 +4,50 @@
 
 {% block content %}
 
-    <h1>Listagem de Pizzas</h1>
-
-    <a href="{% url 'pizzas:nova-pizza' %}">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Novo
-    </a>
-    <br/><br/>
-    <table class="table table-condensed table-striped table-hover">
-        <tr>
-            <th>Sabor</th>
-            <th>Descrição</th>
-            <th colspan="2"></th>
-        </tr>
-        {% for pizza in pizzas %}
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Pizza - Listagem
+      </div>
+      <div class="panel-body">
+        <a href="{% url 'pizzas:nova-pizza' %}" class="btn btn-link">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Novo
+        </a>
+        <br/><br/>
+        <table class="table table-condensed table-striped table-hover">
             <tr>
-                <td style="vertical-align: middle">{{ pizza.sabor }}</td>
-                <td style="vertical-align: middle">{{ pizza.descricao }}</td>
-                <td style="text-align: center">
-                    <a href="{% url 'pizzas:edita-pizza' pizza.id %}">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                        Editar
-                    </a>
-                </td>
-                <td style="text-align: center">
-                    <a href="{% url 'pizzas:exclui-pizza' pizza.id %}">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        Excluir
-                    </a>
-                </td>
+                <th>Sabor</th>
+                <th>Descrição</th>
+                <th colspan="2"></th>
             </tr>
-            <tr>
-                <td style="vertical-align: middle" colspan="5">
-                    <b>Ingredientes:</b>
-                    {% for ingrediente in pizza.ingredientes.all %}
-                        {{ ingrediente.nome }};
-                    {% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+            {% for pizza in pizzas %}
+                <tr>
+                    <td style="vertical-align: middle">{{ pizza.sabor }}</td>
+                    <td style="vertical-align: middle">{{ pizza.descricao }}</td>
+                    <td style="text-align: center">
+                        <a href="{% url 'pizzas:edita-pizza' pizza.id %}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            Editar
+                        </a>
+                    </td>
+                    <td style="text-align: center">
+                        <a href="{% url 'pizzas:exclui-pizza' pizza.id %}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle" colspan="5">
+                        <b>Ingredientes:</b>
+                        {% for ingrediente in pizza.ingredientes.all %}
+                            {{ ingrediente.nome }};
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+      </div>
+    </div>
 
 {% endblock %}
