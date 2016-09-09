@@ -30,3 +30,19 @@ class Pizza(models.Model):
         db_table = 'pizzas'
         verbose_name = 'Pizza'
         verbose_name_plural = 'Pizzas'
+
+class ValorPizza(models.Model):
+
+    PIZZA_SIZES = (
+        (1, 'Broto'),
+        (2, 'Grande')
+    )
+
+    tamanho_pizza = models.IntegerField('tamanho pizza', choices=PIZZA_SIZES, default=2, null=False, blank=False)
+    quantia = models.DecimalField(max_digits=5, decimal_places=2, blank=False, null=False)
+    pizza = models.ForeignKey(Pizza, verbose_name='pizza', related_name='valores')
+
+    class Meta:
+        db_table = 'valores_pizza'
+        verbose_name = 'Valor'
+        verbose_name_plural = 'Valores'

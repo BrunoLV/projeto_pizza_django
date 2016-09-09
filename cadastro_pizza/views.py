@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views.generic.edit import DeleteView, ModelFormMixin
 from django.core.urlresolvers import reverse_lazy
+from django.forms import inlineformset_factory
 
-from .models import Pizza, Ingrediente
+from .models import Pizza, Ingrediente, ValorPizza
 from .forms import CadastroPizzaForm, CadastroIngredienteForm
 
 # Create your views here.
@@ -28,6 +29,27 @@ def cardapio(request):
 
 def lista_ingredientes(request):
     pass
+
+def nova_pizza_2(request):
+    template_name = 'cadastro_pizza/cadastro-pizza-2.html'
+    PizzaFormSet = inlineformset_factory(Pizza, ValorPizza, fields=('quantia', 'tamanho_pizza'), extra=2)
+    context = {}
+    if request.method == 'GET':
+        form = CadastroPizzaForm(instance=Pizza())
+        formset = PizzaFormSet(instance=Pizza(), initial=[{'quantia': 0.00, 'tamanho_pizza': 1,}])
+        context['form'] = form
+        context['formset'] = formset
+        return render(request, template_name, context)
+    if request.method == 'POST':
+        form = CadastroPizzaForm(request.POST)
+        if form.is_valid():
+            pizza = form.save()
+            formset = PizzaFormSet(request.POST, request.FILES, instance=pizza)
+            if formset.is_valid():
+                for form in formset:
+                    if form.is_valid():
+                        form.save()
+                return redirect('pizzas:lista-pizzas')
 
 def nova_pizza(request):
     template_name = 'cadastro_pizza/cadastro-pizza.html'

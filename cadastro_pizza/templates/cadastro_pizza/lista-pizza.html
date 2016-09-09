@@ -43,6 +43,16 @@
                     {% endfor %}
                 </td>
             </tr>
+            <tr>
+                <td style="vertical-align: middle" colspan="5">
+                    <b>Valores:</b>
+                    {% for valor in pizza.valores.all %}
+                        {{valor.get_tamanho_pizza_display}}: {{ valor.quantia }}
+                    {% empty %}
+                        Não tem valores cadastrados.
+                    {% endfor %}
+                </td>
+            </tr>
             {% endfor %}
         </table>
         </div>
