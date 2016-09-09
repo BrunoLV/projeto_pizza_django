@@ -13,8 +13,18 @@ def index(request):
     return HttpResponse("Hello, world. You're at the cadastro-pizza index.")
 
 def lista_pizzas(request):
+    template_name = 'cadastro_pizza/lista-pizza.html'
     pizzas = Pizza.objects.all()
-    return render(request, 'cadastro_pizza/lista-pizza.html', {'pizzas' : pizzas})
+    context = {}
+    context['pizzas'] = pizzas
+    return render(request, template_name, context)
+
+def cardapio(request):
+    template_name = 'cadastro_pizza/cardapio.html'
+    pizzas = Pizza.objects.all()
+    context = {}
+    context['pizzas'] = pizzas
+    return render(request, template_name, context)
 
 def lista_ingredientes(request):
     pass

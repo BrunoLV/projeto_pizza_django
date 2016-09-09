@@ -24,7 +24,7 @@ class Pizza(models.Model):
         return reverse('pizzas:lista-pizzas')
 
     def __str__(self):
-        return self.nome
+        return self.sabor
 
     class Meta:
         db_table = 'pizzas'
