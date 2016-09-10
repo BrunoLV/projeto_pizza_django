@@ -1,9 +1,16 @@
-from django.forms import ModelForm, Textarea, TextInput, NumberInput, CheckboxSelectMultiple, MultipleChoiceField
+from django.forms import ModelForm, Textarea, TextInput, NumberInput, CheckboxSelectMultiple, MultipleChoiceField, ChoiceField, Select
 from django.utils.translation import ugettext_lazy as _
+from django.forms import inlineformset_factory
+
 from .models import Pizza, Ingrediente, ValorPizza
 
+PIZZA_SIZES = (
+    (1, 'Broto'),
+    (2, 'Grande')
+)
+
 class CadastroPizzaForm(ModelForm):
-    
+
     class Meta:
         model = Pizza
         fields = ['sabor', 'descricao', 'ingredientes']
@@ -18,6 +25,12 @@ class CadastroPizzaForm(ModelForm):
             'ingredientes': CheckboxSelectMultiple(),
         }
 
+ValorPizzaFormSet = inlineformset_factory(Pizza,
+    ValorPizza,
+    fields=('quantia', 'tamanho_pizza'),
+    widgets={'quantia': TextInput(attrs={'class':'form-control'}), 'tamanho_pizza':Select(choices=PIZZA_SIZES, attrs={'class':'form-control'})},
+    max_num=2)
+
 class CadastroValorPizza(ModelForm):
 
     class Meta:
@@ -29,7 +42,7 @@ class CadastroValorPizza(ModelForm):
         }
         widgets = {
             'quantia': TextInput(attrs={'class':'form-control'}),
-            'tamanho_pizza': MultipleChoiceField(),
+            'tamanho_pizza': ChoiceField(widget=Select(attrs={'class':'selector'})),
         }
 
 class CadastroIngredienteForm(ModelForm):

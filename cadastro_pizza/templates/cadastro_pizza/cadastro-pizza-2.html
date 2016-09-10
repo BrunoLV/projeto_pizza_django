@@ -40,14 +40,14 @@
         <div class="panel-body">
           {{ formset.management_form }}
           {% for form in formset %}
-          {% for field in form %}
           <div class="form-group">
             <label for="{{form.tamanho_pizza.id_for_label}}">Tamanho: </label>
             {{form.tamanho_pizza}}
+          </div>
+          <div class="form-group">
             <label for="{{form.quantia.id_for_label}}">Valor: </label>
             {{form.quantia}}
           </div>
-          {% endfor %}
           {% endfor %}
         </div>
 

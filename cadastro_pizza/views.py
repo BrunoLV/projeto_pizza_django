@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.forms import inlineformset_factory
 
 from .models import Pizza, Ingrediente, ValorPizza
-from .forms import CadastroPizzaForm, CadastroIngredienteForm
+from .forms import CadastroPizzaForm, CadastroIngredienteForm, ValorPizzaFormSet
 
 # Create your views here.
 
@@ -32,24 +32,22 @@ def lista_ingredientes(request):
 
 def nova_pizza_2(request):
     template_name = 'cadastro_pizza/cadastro-pizza-2.html'
-    PizzaFormSet = inlineformset_factory(Pizza, ValorPizza, fields=('quantia', 'tamanho_pizza'), extra=2)
+    pizza = Pizza()
     context = {}
     if request.method == 'GET':
-        form = CadastroPizzaForm(instance=Pizza())
-        formset = PizzaFormSet(instance=Pizza(), initial=[{'quantia': 0.00, 'tamanho_pizza': 1,}])
+        form = CadastroPizzaForm()
+        formset = ValorPizzaFormSet(instance=pizza)
         context['form'] = form
         context['formset'] = formset
         return render(request, template_name, context)
     if request.method == 'POST':
         form = CadastroPizzaForm(request.POST)
         if form.is_valid():
-            pizza = form.save()
-            formset = PizzaFormSet(request.POST, request.FILES, instance=pizza)
+            created_pizza = form.save()
+            formset = ValorPizzaFormSet(request.POST, instance=created_pizza)
             if formset.is_valid():
-                for form in formset:
-                    if form.is_valid():
-                        form.save()
-                return redirect('pizzas:lista-pizzas')
+                formset.save()
+        return redirect('pizzas:lista-pizzas')
 
 def nova_pizza(request):
     template_name = 'cadastro_pizza/cadastro-pizza.html'
@@ -73,8 +71,8 @@ def edita_pizza(request,pk):
         form = CadastroPizzaForm(request.POST, instance=Pizza.objects.get(pk=pk))
         if form.is_valid:
             form.save()
-            return redirect('pizzas:lista-pizzas')    
-    
+            return redirect('pizzas:lista-pizzas')
+
 def novo_ingrediente(request):
     template_name = 'cadastro_pizza/cadastro-ingrediente.html'
     context = {
