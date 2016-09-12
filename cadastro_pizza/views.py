@@ -30,8 +30,8 @@ def cardapio(request):
 def lista_ingredientes(request):
     pass
 
-def nova_pizza_2(request):
-    template_name = 'cadastro_pizza/cadastro-pizza-2.html'
+def nova_pizza(request):
+    template_name = 'cadastro_pizza/cadastro-pizza.html'
     pizza = Pizza()
     context = {}
     if request.method == 'GET':
@@ -47,30 +47,24 @@ def nova_pizza_2(request):
             formset = ValorPizzaFormSet(request.POST, instance=created_pizza)
             if formset.is_valid():
                 formset.save()
-        return redirect('pizzas:lista-pizzas')
-
-def nova_pizza(request):
-    template_name = 'cadastro_pizza/cadastro-pizza.html'
-    context = {}
-    if request.method == 'GET':
-        context['form'] = CadastroPizzaForm
-        return render(request, template_name, context)
-    if request.method == 'POST':
-        form = CadastroPizzaForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('pizzas:lista-pizzas')
+                return redirect('pizzas:lista-pizzas')
 
 def edita_pizza(request,pk):
     template_name = 'cadastro_pizza/cadastro-pizza.html'
+    pizza = Pizza.objects.get(pk=pk)
     context = {}
     if request.method == 'GET':
-        context['form'] = CadastroPizzaForm(instance=Pizza.objects.get(pk=pk))
+        form = CadastroPizzaForm(instance=pizza)
+        formset = ValorPizzaFormSet(instance=pizza)
+        context['form'] = form
+        context['formset'] = formset
         return render(request, template_name, context)
     if request.method == 'POST':
-        form = CadastroPizzaForm(request.POST, instance=Pizza.objects.get(pk=pk))
-        if form.is_valid:
-            form.save()
+        form = CadastroPizzaForm(request.POST, instance=pizza)
+        formset = ValorPizzaFormSet(request.POST, instance=pizza)
+        if form.is_valid() and formset.is_valid():
+            #form.save()
+            formset.save()
             return redirect('pizzas:lista-pizzas')
 
 def novo_ingrediente(request):

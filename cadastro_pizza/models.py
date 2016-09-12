@@ -40,7 +40,7 @@ class ValorPizza(models.Model):
 
     tamanho_pizza = models.IntegerField('tamanho pizza', choices=PIZZA_SIZES, default=2, null=False, blank=False)
     quantia = models.DecimalField(max_digits=5, decimal_places=2, blank=False, null=False)
-    pizza = models.ForeignKey(Pizza, verbose_name='pizza', related_name='valores')
+    pizza = models.ForeignKey(Pizza, verbose_name='pizza', related_name='valores', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'valores_pizza'
