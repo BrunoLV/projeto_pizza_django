@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>{{ pizza.sabor }}</h2>
+
+    {{ pizza.descricao|linebreaks }}
+
+    <h4>Valores</h4>
+    <ul>
+        {% for valor in pizza.valores.all %}
+            <li><b>{{ valor.get_tamanho_pizza_display }}</b> - R$ {{ valor.quantia }}</li>
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}

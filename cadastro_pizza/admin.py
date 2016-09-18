@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Pizza, Ingrediente, ValorPizza
 
 # Register your models here.

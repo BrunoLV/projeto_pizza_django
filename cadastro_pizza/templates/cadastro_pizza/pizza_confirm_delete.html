@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block title %} Cadastro de Pizzas {% endblock %}
 {% block content %}
-<form method="post">
-	{% csrf_token %}
-	Você tem certeza que deseja excluir a pizza {{ object.sabor }}?
-	<br/>
-	<button type="submit" value="Confirmar" class="btn btn-danger">
-		<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-		Sim
-	</button>
-	<a href="{% url 'pizzas:lista-pizzas' %}" class="btn btn-link">
-		<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-		Não
-	</a>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        Você tem certeza que deseja excluir a pizza {{ object.sabor }}?
+        <br/>
+        <button type="submit" value="Confirmar" class="btn btn-danger">
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            Sim
+        </button>
+        <a href="{% url 'pizzas:lista-pizzas' %}" class="btn btn-link">
+            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+            Não
+        </a>
+    </form>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 
+
 # Create your models here.
 
 class Ingrediente(models.Model):
@@ -14,6 +15,7 @@ class Ingrediente(models.Model):
         db_table = 'ingredientes'
         verbose_name = 'Ingrediente'
         verbose_name_plural = 'Ingredientes'
+
 
 class Pizza(models.Model):
     sabor = models.CharField('sabor', max_length=100, null=False, blank=False, unique=True)
@@ -31,8 +33,8 @@ class Pizza(models.Model):
         verbose_name = 'Pizza'
         verbose_name_plural = 'Pizzas'
 
-class ValorPizza(models.Model):
 
+class ValorPizza(models.Model):
     PIZZA_SIZES = (
         (1, 'Broto'),
         (2, 'Grande')

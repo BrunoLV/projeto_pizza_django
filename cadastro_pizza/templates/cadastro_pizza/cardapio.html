@@ -1,53 +1,60 @@
 {% extends "base.html" %}
 {% block title %} Listagem de Pizzas {% endblock %}
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Cardápio
-    </div>
-    <div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Cardápio
+        </div>
+        <div class="panel-body">
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#pizzas_tab">Pizzas</a></li>
-            <li><a data-toggle="tab" href="#esfihas_tab">Esfihas</a></li>
-            <li><a data-toggle="tab" href="#lanches_tab">Lanches</a></li>
-            <li><a data-toggle="tab" href="#bebidas_tab">Bebidas</a></li>
-        </ul>
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#pizzas_tab">Pizzas</a></li>
+                <!--
+                <li><a data-toggle="tab" href="#esfihas_tab">Esfihas</a></li>
+                <li><a data-toggle="tab" href="#lanches_tab">Lanches</a></li>
+                <li><a data-toggle="tab" href="#bebidas_tab">Bebidas</a></li>
+                -->
+            </ul>
 
-        <div class="tab-content">
-            <div id="pizzas_tab" class="tab-pane fade in active">
-                <br/>
-                <div class="table-responsive">
-                <table class="table table-striped table-condensed">
-                    <tbody>
-                        {% for pizza in pizzas %}
-                            <tr>
-                                <td style="vertical-align: middle">{{ pizza }}</td>
-                                <td>
-                                    <a class="btn btn-link">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                        Detalhes
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}    
-                    </tbody>                    
-                </table>
+            <div class="tab-content">
+                <div id="pizzas_tab" class="tab-pane fade in active">
+                    <br/>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-condensed">
+                            <tbody>
+                            {% for pizza in pizzas %}
+                                <tr>
+                                    <td style="vertical-align: middle">{{ pizza }}</td>
+                                    <td>
+                                        <a class="btn btn-link" href="{% url 'pizzas:detalhe' pizza.id %}">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            Detalhes
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div id="esfihas_tab" class="tab-pane fade">
-                <br/>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            <div id="lanches_tab" class="tab-pane fade">
-                <br/>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-            </div>
-            <div id="bebidas_tab" class="tab-pane fade">
-                <br/>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <!--
+                <div id="esfihas_tab" class="tab-pane fade">
+                    <br/>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                </div>
+                <div id="lanches_tab" class="tab-pane fade">
+                    <br/>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam.</p>
+                </div>
+                <div id="bebidas_tab" class="tab-pane fade">
+                    <br/>
+                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo.</p>
+                </div>
+                -->
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
